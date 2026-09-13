@@ -1,0 +1,286 @@
+<div class="container-fluid p-4">
+
+  <!-- Header -->
+  <div class="mb-4">
+    <h2 class="fw-bold mb-1">
+      Mon profil
+    </h2>
+
+    <p class="text-muted">
+      Gérez vos informations personnelles et votre sécurité.
+    </p>
+  </div>
+
+
+  @if (user) {
+
+  <div class="row g-4">
+
+    <!-- Profile card -->
+    <div class="col-lg-4">
+
+      <div class="card border-0 shadow-sm">
+
+        <div class="card-body text-center p-4">
+
+          <!-- Avatar -->
+          <div class="avatar mx-auto mb-3">
+            👤
+          </div>
+
+          <h4 class="fw-bold mb-1">
+            {{ user.prenom }} {{ user.nom }}
+          </h4>
+
+          <p class="text-muted mb-2">
+            {{ user.email }}
+          </p>
+
+          <span class="badge bg-primary">
+              Administrateur
+            </span>
+
+          <hr>
+
+          <div class="text-start">
+
+            <p class="mb-2">
+              <strong>Compte :</strong>
+              Administrateur
+            </p>
+
+            <p class="mb-2">
+              <strong>Username :</strong>
+              {{ user.username }}
+            </p>
+
+            <p class="mb-0">
+              <strong>ID :</strong>
+              {{ user.id }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Personal information -->
+    <div class="col-lg-8">
+
+      <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white border-0 p-4">
+
+          <h5 class="fw-bold mb-1">
+            Informations personnelles
+          </h5>
+
+          <p class="text-muted mb-0">
+            Vos informations administrateur
+          </p>
+
+        </div>
+
+
+        <div class="card-body p-4">
+
+          <form>
+
+            <div class="row">
+
+              <!-- Prénom -->
+              <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                  Prénom
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.prenom"
+                  name="prenom">
+
+              </div>
+
+
+              <!-- Nom -->
+              <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                  Nom
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.nom"
+                  name="nom">
+
+              </div>
+
+
+              <!-- Email -->
+              <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  class="form-control"
+                  [(ngModel)]="user.email"
+                  name="email">
+
+              </div>
+
+
+              <!-- Phone -->
+              <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                  Téléphone
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.phone"
+                  name="phone">
+
+              </div>
+
+
+              <!-- Username -->
+              <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                  Nom d'utilisateur
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.username"
+                  name="username">
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="saveProfile()">
+
+              💾 Enregistrer les modifications
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <!-- Security -->
+      <div class="card border-0 shadow-sm mt-4">
+
+        <div class="card-header bg-white border-0 p-4">
+
+          <h5 class="fw-bold mb-1">
+            🔐 Sécurité
+          </h5>
+
+          <p class="text-muted mb-0">
+            Modifier votre mot de passe
+          </p>
+
+        </div>
+
+
+        <div class="card-body p-4">
+
+          <form>
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Ancien mot de passe
+              </label>
+
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="password.oldPassword"
+                name="oldPassword">
+
+            </div>
+
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Nouveau mot de passe
+              </label>
+
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="password.newPassword"
+                name="newPassword">
+
+            </div>
+
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Confirmer le nouveau mot de passe
+              </label>
+
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="password.confirmPassword"
+                name="confirmPassword">
+
+            </div>
+
+
+            <button
+              type="button"
+              class="btn btn-outline-primary">
+
+              🔑 Changer le mot de passe
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  }
+
+  @else {
+
+  <div class="alert alert-info">
+    Chargement du profil...
+  </div>
+
+  }
+
+</div>

@@ -1,0 +1,310 @@
+/* ==========================================================================
+   Registre — Clients
+   Palette : papier chaud / encre nuit / rouge tampon (accent unique)
+   ========================================================================== */
+
+:host {
+  --paper: #f1ece1;
+  --paper-raised: #faf7f0;
+  --ink: #1e2a3a;
+  --ink-soft: #4b5563;
+  --muted: #8c8474;
+  --rule: #d8cfbc;
+  --rule-strong: #b9ad93;
+  --stamp: #8c3b32;
+  --stamp-dark: #6f2e27;
+  --stamp-tint: rgba(140, 59, 50, 0.08);
+
+  display: block;
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--paper);
+  padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem;
+  min-height: 100%;
+}
+
+/* -------------------------------------------------------------------- */
+/* En-tête                                                               */
+/* -------------------------------------------------------------------- */
+
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.eyebrow {
+  margin: 0 0 0.15rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--muted);
+  font-family: "Source Serif 4", Georgia, serif;
+}
+
+.page-head h1 {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  letter-spacing: -0.01em;
+}
+
+/* -------------------------------------------------------------------- */
+/* Boutons                                                               */
+/* -------------------------------------------------------------------- */
+
+.btn-primary {
+  border: 1px solid var(--stamp);
+  background: var(--stamp);
+  color: var(--paper-raised);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--stamp-dark);
+  border-color: var(--stamp-dark);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary:disabled {
+  background: var(--muted);
+  border-color: var(--muted);
+  cursor: not-allowed;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--stamp-dark);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Barre de recherche                                                    */
+/* -------------------------------------------------------------------- */
+
+.toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.toolbar input[type="search"] {
+  width: 100%;
+  max-width: 340px;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-size: 0.95rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 3px;
+}
+
+.toolbar input[type="search"]::placeholder {
+  color: var(--muted);
+}
+
+.toolbar input[type="search"]:focus-visible {
+  outline: none;
+  border-color: var(--stamp);
+  box-shadow: 0 0 0 3px var(--stamp-tint);
+}
+
+/* -------------------------------------------------------------------- */
+/* Formulaire de création                                                */
+/* -------------------------------------------------------------------- */
+
+.inline-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem 1.5rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--stamp);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  border-radius: 3px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.field input {
+  border: none;
+  border-bottom: 1.5px solid var(--rule-strong);
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.95rem;
+  padding: 0.4rem 0.1rem;
+  border-radius: 0;
+}
+
+.field input:focus-visible {
+  outline: none;
+  border-bottom-color: var(--stamp);
+}
+
+.field input:disabled {
+  color: var(--muted);
+  border-bottom-style: dashed;
+}
+
+.field input::placeholder {
+  color: var(--muted);
+}
+
+.inline-form .btn-primary {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 0.25rem;
+}
+
+.form-error {
+  grid-column: 1 / -1;
+  margin: -0.5rem 0 0;
+  color: var(--stamp-dark);
+  font-size: 0.88rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* États (chargement / erreur / vide)                                    */
+/* -------------------------------------------------------------------- */
+
+.state {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-family: "Source Serif 4", Georgia, serif;
+  padding: 1rem 0;
+}
+
+.state.error {
+  color: var(--stamp-dark);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------------- */
+/* Tableau — registre                                                    */
+/* -------------------------------------------------------------------- */
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+}
+
+.ledger thead th {
+  text-align: left;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.ledger tbody tr {
+  border-bottom: 1px solid var(--rule);
+}
+
+.ledger tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ledger td {
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.row-link {
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.row-link:hover {
+  background: var(--stamp-tint);
+}
+
+.row-link:hover .chevron {
+  color: var(--stamp);
+  transform: translateX(2px);
+}
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.chevron {
+  color: var(--rule-strong);
+  text-align: right;
+  transition: color 0.12s ease, transform 0.12s ease;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  font-family: "Source Serif 4", Georgia, serif;
+  padding: 2rem 1rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Responsive                                                            */
+/* -------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .page-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ledger thead {
+    display: none;
+  }
+
+  .ledger tbody tr {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "ref name chev"
+      "email email email";
+    padding: 0.75rem 1rem;
+  }
+
+  .ledger td:nth-child(1) { grid-area: ref; }
+  .ledger td:nth-child(2) { grid-area: name; }
+  .ledger td:nth-child(3) { grid-area: email; font-size: 0.85rem; }
+  .ledger td:nth-child(4) { grid-area: chev; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

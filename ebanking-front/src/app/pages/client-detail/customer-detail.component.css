@@ -1,0 +1,20 @@
+.actions { display: flex; gap: 10px; }
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.detail-row span:last-child { color: var(--ink); }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0 14px;
+}
+
+.section-head h2 { font-size: 18px; }

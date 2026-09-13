@@ -1,0 +1,101 @@
+<a class="back-link" *ngIf="account" [routerLink]="['/customers', account.customerDto?.id]">
+  ← Retour à {{ account.customerDto?.nom}}
+</a>
+
+<p class="state" *ngIf="loading">Chargement du relevé…</p>
+<p class="state error" *ngIf="error">{{ error }}</p>
+
+<ng-container *ngIf="account && !loading">
+  <header class="page-head">
+    <div>
+      <p class="eyebrow mono">Compte {{ accountId }}</p>
+      <h1 class="mono balance">{{ account.balance | number: '1.2-2' }} <span>MAD</span></h1>
+    </div>
+    <div class="tags">
+      <span class="pill neutral">{{ isCurrent() ? 'Compte courant' : 'Compte épargne' }}</span>
+      <span class="pill neutral">{{ account.status }}</span>
+    </div>
+  </header>
+
+  <div class="card meta-card">
+    <p class="detail-row" *ngIf="isCurrent()">
+      <span>Découvert autorisé</span><span class="mono">{{ account.overdraft | number: '1.2-2' }} MAD</span>
+    </p>
+    <p class="detail-row" *ngIf="!isCurrent()">
+      <span>Taux d'intérêt</span><span class="mono">{{ account.interestRate }}%</span>
+    </p>
+    <p class="detail-row">
+      <span>Ouvert le</span><span class="mono">{{ account.creationDate | date: 'dd/MM/yyyy' }}</span>
+    </p>
+  </div>
+
+  <div class="op-buttons">
+    <button class="btn-secondary" (click)="openForm('credit')" [class.on]="activeForm === 'credit'">
+      + Créditer
+    </button>
+    <button class="btn-secondary" (click)="openForm('debit')" [class.on]="activeForm === 'debit'">
+      − Débiter
+    </button>
+    <button class="btn-secondary" (click)="openForm('transfer')" [class.on]="activeForm === 'transfer'">
+      ⇄ Virement
+    </button>
+  </div>
+
+  <p class="op-success" *ngIf="opSuccess">{{ opSuccess }}</p>
+
+  <form class="inline-form" *ngIf="activeForm" (ngSubmit)="submitOperation()">
+    <div class="field">
+      <label for="amount">Montant (MAD)</label>
+      <input id="amount" type="number" step="0.01" min="0.01" [(ngModel)]="amount" name="amount" required />
+    </div>
+
+    <div class="field" *ngIf="activeForm !== 'transfer'">
+      <label for="desc">Description</label>
+      <input id="desc" type="text" [(ngModel)]="description" name="desc" placeholder="Motif de l'opération" />
+    </div>
+
+    <div class="field" *ngIf="activeForm === 'transfer'">
+      <label for="dest">Compte destinataire (réf.)</label>
+      <input id="dest" type="text" [(ngModel)]="destinationId" name="dest" required />
+    </div>
+
+    <button class="btn-primary" type="submit" [disabled]="opBusy">
+      {{ opBusy ? 'Traitement…' : 'Confirmer' }}
+    </button>
+    <p class="form-error" *ngIf="opError">{{ opError }}</p>
+  </form>
+
+  <h2 class="statement-title">Relevé d'opérations</h2>
+
+  <table class="ledger">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th class="num">Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let op of history?.accountOperationDtos">
+        <td class="muted mono">{{ op.operationDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ op.description }}</td>
+        <td><span class="pill" [ngClass]="op.type === 'CREDIT' ? 'credit' : 'debit'">{{ op.type }}</span></td>
+        <td class="num amount" [ngClass]="op.type === 'CREDIT' ? 'credit' : 'debit'">
+          {{ op.type === 'CREDIT' ? '+' : '−' }}{{ op.amount | number: '1.2-2' }}
+        </td>
+      </tr>
+      <tr *ngIf="history && history.accountOperationDtos.length === 0">
+        <td colspan="4" class="empty">Aucune opération sur cette page.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pager" *ngIf="history && history.totalepage > 1">
+    <button class="btn-secondary" (click)="goToPage(page - 1)" [disabled]="page === 0">← Précédent</button>
+    <span class="mono">Page {{ page + 1 }} / {{ history.totalepage }}</span>
+    <button class="btn-secondary" (click)="goToPage(page + 1)" [disabled]="page + 1 >= history.totalepage">
+      Suivant →
+    </button>
+  </div>
+</ng-container>

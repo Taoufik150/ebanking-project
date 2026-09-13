@@ -1,0 +1,160 @@
+<a class="back-link" routerLink="/admin-home/customers">
+  ← Retour au registre
+</a>>
+
+<p class="state" *ngIf="loading">Chargement…</p>
+<p class="state error" *ngIf="error">{{ error }}</p>
+
+<ng-container *ngIf="customer && !loading">
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Client #{{ customer.id }}</p>
+      <h1>{{ customer.nom }}</h1>
+    </div>
+    <div class="actions">
+      <button class="btn-secondary" (click)="startEdit()" *ngIf="!editing">Modifier</button>
+      <button class="btn-danger" (click)="remove()" *ngIf="!editing">Supprimer</button>
+    </div>
+  </header>
+
+  <form class="inline-form" *ngIf="editing" (ngSubmit)="save()">
+    <div class="field">
+      <label for="name">Nom</label>
+
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="draft.nom"
+        name="name"
+        placeholder="Ex: Hassan"
+        required
+      />
+    </div>
+    <div class="field">
+      <label for="name">Prenom</label>
+
+      <input
+        id="prenom"
+        type="text"
+        [(ngModel)]="draft.prenom"
+        name="prenom"
+        placeholder="Ex: Hassan"
+        required
+      />
+    </div>
+
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">E-mail</label>
+
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="draft.email"
+        name="email"
+        placeholder="Ex: hassan@gmail.com"
+        required
+      />
+    </div>
+
+    <!-- Username -->
+    <div class="field">
+      <label for="username">Nom d'utilisateur</label>
+
+      <input
+        id="username"
+        type="text"
+        [(ngModel)]="draft.username"
+        name="username"
+        placeholder="Ex: hassan"
+        required
+      />
+    </div>
+
+    <!-- Password -->
+    <div class="field">
+      <label for="password">Mot de passe</label>
+
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="draft.password"
+        name="password"
+        placeholder="Mot de passe"
+        required
+      />
+    </div>
+
+    <!-- Téléphone -->
+    <div class="field">
+      <label for="phone">Téléphone</label>
+
+      <input
+        id="phone"
+        type="number"
+        [(ngModel)]="draft.phone"
+        name="phone"
+        placeholder="0612345678"
+        required
+      />
+    </div>
+
+    <!-- Rôle -->
+    <div class="field">
+      <label>Rôle</label>
+
+      <input
+        type="text"
+        value="CUSTOMER"
+        disabled
+      />
+    </div>
+
+    <button class="btn-primary" type="submit" [disabled]="saving">
+      {{ saving ? 'Enregistrement…' : 'Enregistrer' }}
+    </button>
+    <button class="btn-secondary" type="button" (click)="cancelEdit()">Annuler</button>
+    <p class="form-error" *ngIf="saveError">{{ saveError }}</p>
+  </form>
+
+  <div class="card" *ngIf="!editing">
+    <p class="detail-row"><span>E-mail</span><span class="mono">{{ customer.email }}</span></p>
+  </div>
+
+  <div class="section-head">
+    <h2>Comptes</h2>
+    <a
+      class="btn-secondary"
+      [routerLink]="['/admin-home/customers', customerId, 'new-account']"
+    >
+      + Ouvrir un compte
+    </a>
+  </div>
+
+  <table class="ledger">
+    <thead>
+      <tr>
+        <th>Compte</th>
+        <th>Type</th>
+        <th>Statut</th>
+        <th>Solde</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of accounts" class="row-link" (click)="openAccount(a.id)">
+        <td class="mono muted">{{ a.id.slice(0, 8) }}…</td>
+        <td>
+          <span class="pill neutral">{{ isCurrent(a) ? 'Courant' : 'Épargne' }}</span>
+        </td>
+        <td class="muted">{{ a.status }}</td>
+        <td class="mono">{{ a.balance | number: '1.2-2' }} MAD</td>
+        <td class="chevron">→</td>
+      </tr>
+      <tr *ngIf="accounts.length === 0">
+        <td colspan="5" class="empty">Ce client n’a encore aucun compte ouvert.</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

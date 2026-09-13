@@ -1,0 +1,74 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">EBANK</h2>
+      <p class="text-muted">
+        Connectez-vous à votre espace bancaire
+      </p>
+    </div>
+
+    <form (ngSubmit)="login()">
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">
+          Nom d'utilisateur
+        </label>
+
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          [(ngModel)]="loginData.username"
+          placeholder="Entrez votre username"
+          required
+        >
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">
+          Mot de passe
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          [(ngModel)]="loginData.password"
+          placeholder="Entrez votre mot de passe"
+          required
+        >
+      </div>
+
+      <!-- Error -->
+      @if (errorMessage) {
+      <div class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      }
+
+      <!-- Button -->
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="loading"
+      >
+
+        @if (loading) {
+        Connexion...
+        } @else {
+        Se connecter
+        }
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

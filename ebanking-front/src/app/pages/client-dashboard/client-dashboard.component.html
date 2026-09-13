@@ -1,0 +1,77 @@
+<div class="container-fluid p-4 client-space">
+
+  <!-- Header -->
+  <div class="mb-4 greeting">
+    <h1 class="greeting-title">Bonjour 👋</h1>
+    <p class="greeting-sub">Bienvenue dans votre espace bancaire.</p>
+  </div>
+
+  <!-- Solde total : bloc héros -->
+  <div class="hero-stat mb-4">
+    <div class="hero-accent gold"></div>
+    <div class="hero-content">
+      <p class="stat-label">Solde total</p>
+      <h2 class="hero-number">
+        {{ totalBalance | number:'1.2-2' }} <span class="currency">MAD</span>
+      </h2>
+      <p class="stat-caption">Cumulé sur {{ totalAccounts }} compte{{ totalAccounts > 1 ? 's' : '' }}</p>
+    </div>
+  </div>
+
+  <!-- MES COMPTES -->
+  <div class="accounts-panel">
+
+    <div class="d-flex justify-content-between align-items-center mb-3 panel-header">
+      <h4 class="panel-title mb-0">Mes comptes</h4>
+      <a routerLink="/client/accounts" class="link-all">
+        Voir tous les comptes
+      </a>
+    </div>
+
+    <!-- État vide -->
+    <div class="empty-state" *ngIf="!accounts || accounts.length === 0">
+      <p>Vous n'avez encore aucun compte associé.</p>
+    </div>
+
+    <!-- Liste des comptes -->
+    <div
+      *ngFor="let account of accounts"
+      class="account-row"
+      [class.savings]="isSavingsAccount(account)">
+
+      <div class="account-accent" [class.teal]="isSavingsAccount(account)" [class.blue]="!isSavingsAccount(account)"></div>
+
+      <div class="account-body">
+
+        <div class="account-col type-col">
+          <span class="stat-label">Type</span>
+          <p class="account-type">
+            {{ isSavingsAccount(account) ? 'Compte Épargne' : 'Compte Courant' }}
+          </p>
+        </div>
+
+        <div class="account-col">
+          <span class="stat-label">Numéro</span>
+          <p class="account-number">{{ account.id }}</p>
+        </div>
+
+        <div class="account-col balance-col">
+          <span class="stat-label">Solde</span>
+          <p class="account-balance">
+            {{ account.balance | number:'1.2-2' }} <span class="currency-sm">MAD</span>
+          </p>
+        </div>
+
+        <div class="account-col action-col">
+          <a [routerLink]="['/client/accounts', account.id]" class="btn-arrow" aria-label="Voir le compte">
+            →
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

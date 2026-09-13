@@ -1,0 +1,27 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fa;
+}
+
+.login-card {
+  width: 400px;
+  padding: 35px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.login-card h2 {
+  letter-spacing: 2px;
+}
+
+.form-control {
+  padding: 12px;
+}
+
+.btn {
+  padding: 12px;
+}

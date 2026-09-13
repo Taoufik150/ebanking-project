@@ -1,0 +1,62 @@
+<!-- État de chargement -->
+<div class="ledger" *ngIf="isLoading">
+  <div class="hero-stat skeleton"></div>
+  <div class="stat-row">
+    <div class="stat-line skeleton" *ngFor="let i of [1,2,3]"></div>
+  </div>
+</div>
+
+<!-- État d'erreur -->
+<div class="ledger-error" *ngIf="hasError && !isLoading">
+  <span>Le tableau de bord n'a pas pu être chargé.</span>
+  <button class="btn-retry" (click)="loadDashboard()">Réessayer</button>
+</div>
+
+<!-- Tableau de bord -->
+<div class="ledger" *ngIf="dashBoard && !isLoading">
+
+  <!-- Solde total : bloc héros -->
+  <div class="hero-stat">
+    <div class="hero-accent gold"></div>
+    <div class="hero-content">
+      <p class="stat-label">Solde total</p>
+      <h1 class="hero-number">
+        {{ dashBoard.totalBalance | number:'1.2-2' }} <span class="currency">MAD</span>
+      </h1>
+      <p class="stat-caption">Solde cumulé sur tous les comptes</p>
+    </div>
+  </div>
+
+  <!-- Ligne des 3 stats secondaires -->
+  <div class="stat-row">
+
+    <div class="stat-line">
+      <div class="line-accent blue"></div>
+      <div class="line-content">
+        <p class="stat-label">Clients</p>
+        <p class="stat-number">{{ dashBoard.totalCustomers }}</p>
+        <p class="stat-caption">Clients enregistrés</p>
+      </div>
+    </div>
+
+    <div class="stat-line">
+      <div class="line-accent teal"></div>
+      <div class="line-content">
+        <p class="stat-label">Comptes</p>
+        <p class="stat-number">{{ dashBoard.totalAccounts }}</p>
+        <p class="stat-caption">Comptes bancaires</p>
+      </div>
+    </div>
+
+    <div class="stat-line">
+      <div class="line-accent sienna"></div>
+      <div class="line-content">
+        <p class="stat-label">Opérations</p>
+        <p class="stat-number">{{ dashBoard.totalOperations }}</p>
+        <p class="stat-caption">Opérations bancaires</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

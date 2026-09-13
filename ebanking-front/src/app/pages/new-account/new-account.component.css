@@ -1,0 +1,33 @@
+.form-card {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kind-switch {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.kind-option {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: var(--paper-raised);
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-right: 1px solid var(--line);
+}
+
+.kind-option:last-child { border-right: none; }
+
+.kind-option.selected {
+  background: var(--ink);
+  color: #fff;
+}
+
+.form-card .field input { width: 100%; }

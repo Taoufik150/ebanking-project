@@ -1,0 +1,204 @@
+<a
+  class="back-link"
+  [routerLink]="['/admin-home/customers', customerId]"
+>
+  ← Retour au client
+</a>
+
+<p
+  class="state"
+  *ngIf="loading"
+>
+  Chargement…
+</p>
+
+<p
+  class="state error"
+  *ngIf="error"
+>
+  {{ error }}
+</p>
+
+<ng-container *ngIf="customer && !loading">
+
+  <!-- ============================== -->
+  <!-- HEADER -->
+  <!-- ============================== -->
+
+  <header class="page-head">
+
+    <div>
+
+      <p class="eyebrow">
+        Client #{{ customer.id }}
+      </p>
+
+      <h1>
+        Ouvrir un compte
+      </h1>
+
+      <p class="muted">
+        {{ customer.nom }} {{ customer.prenom }}
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <!-- ============================== -->
+  <!-- FORMULAIRE -->
+  <!-- ============================== -->
+
+  <form
+    class="inline-form"
+    (ngSubmit)="createAccount()"
+  >
+
+    <!-- TYPE DE COMPTE -->
+
+    <div class="field">
+
+      <label for="accountType">
+        Type de compte
+      </label>
+
+      <select
+        id="accountType"
+        [(ngModel)]="accountType"
+        name="accountType"
+      >
+
+        <option value="CURRENT">
+          Compte courant
+        </option>
+
+        <option value="SAVING">
+          Compte épargne
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- SOLDE INITIAL -->
+
+    <div class="field">
+
+      <label for="initialBalance">
+        Solde initial
+      </label>
+
+      <input
+        id="initialBalance"
+        type="number"
+        min="0"
+        step="0.01"
+        [(ngModel)]="initialBalance"
+        name="initialBalance"
+        required
+      />
+
+      <small>
+        Montant initial en MAD
+      </small>
+
+    </div>
+
+
+    <!-- TAUX D'INTÉRÊT -->
+
+    <div
+      class="field"
+      *ngIf="accountType === 'SAVING'"
+    >
+
+      <label for="rate">
+        Taux d'intérêt (%)
+      </label>
+
+      <input
+        id="rate"
+        type="number"
+        min="0"
+        step="0.1"
+        [(ngModel)]="rate"
+        name="rate"
+        required
+      />
+
+    </div>
+
+
+    <!-- TITULAIRE -->
+
+    <div class="field">
+
+      <label for="customer">
+        Titulaire
+      </label>
+
+      <input
+        id="customer"
+        type="text"
+        [value]="customer.nom + ' ' + customer.prenom"
+        disabled
+      />
+
+    </div>
+
+
+    <!-- ERREUR -->
+
+    <p
+      class="form-error"
+      *ngIf="error"
+    >
+      {{ error }}
+    </p>
+
+
+    <!-- SUCCÈS -->
+
+    <p
+      class="success"
+      *ngIf="success"
+    >
+      {{ success }}
+    </p>
+
+
+    <!-- BOUTONS -->
+
+    <div class="actions">
+
+      <button
+        class="btn-primary"
+        type="submit"
+        [disabled]="saving"
+      >
+
+        {{
+        saving
+        ? 'Création…'
+        : 'Créer le compte'
+        }}
+
+      </button>
+
+
+      <button
+        class="btn-secondary"
+        type="button"
+        (click)="cancel()"
+        [disabled]="saving"
+      >
+        Annuler
+      </button>
+
+    </div>
+
+  </form>
+
+</ng-container>

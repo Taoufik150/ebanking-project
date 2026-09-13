@@ -1,0 +1,199 @@
+
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Registre</p>
+    <h1>Clients</h1>
+  </div>
+
+  <button class="btn-primary" (click)="toggleForm()">
+    {{ showForm ? 'Annuler' : '+ Nouveau client' }}
+  </button>
+</header>
+
+<div class="toolbar">
+  <input
+    type="search"
+    placeholder="Rechercher un client par nom…"
+    [(ngModel)]="keyword"
+    (ngModelChange)="onSearchChange()"
+  />
+</div>
+
+<!-- Formulaire de création -->
+<form
+  class="inline-form"
+  *ngIf="showForm"
+  (ngSubmit)="submitCustomer()"
+>
+
+  <!-- Nom -->
+  <div class="field">
+    <label for="name">Nom</label>
+
+    <input
+      id="name"
+      type="text"
+      [(ngModel)]="draft.nom"
+      name="name"
+      placeholder="Ex: Hassan"
+      required
+    />
+  </div>
+  <div class="field">
+    <label for="name">Prenom</label>
+
+    <input
+      id="prenom"
+      type="text"
+      [(ngModel)]="draft.prenom"
+      name="prenom"
+      placeholder="Ex: Hassan"
+      required
+    />
+  </div>
+
+
+  <!-- Email -->
+  <div class="field">
+    <label for="email">E-mail</label>
+
+    <input
+      id="email"
+      type="email"
+      [(ngModel)]="draft.email"
+      name="email"
+      placeholder="Ex: hassan@gmail.com"
+      required
+    />
+  </div>
+
+  <!-- Username -->
+  <div class="field">
+    <label for="username">Nom d'utilisateur</label>
+
+    <input
+      id="username"
+      type="text"
+      [(ngModel)]="draft.username"
+      name="username"
+      placeholder="Ex: hassan"
+      required
+    />
+  </div>
+
+  <!-- Password -->
+  <div class="field">
+    <label for="password">Mot de passe</label>
+
+    <input
+      id="password"
+      type="password"
+      [(ngModel)]="draft.password"
+      name="password"
+      placeholder="Mot de passe"
+      required
+    />
+  </div>
+
+  <!-- Téléphone -->
+  <div class="field">
+    <label for="phone">Téléphone</label>
+
+    <input
+      id="phone"
+      type="number"
+      [(ngModel)]="draft.phone"
+      name="phone"
+      placeholder="0612345678"
+      required
+    />
+  </div>
+
+  <!-- Rôle -->
+  <div class="field">
+    <label>Rôle</label>
+
+    <input
+      type="text"
+      value="CUSTOMER"
+      disabled
+    />
+  </div>
+
+  <!-- Bouton -->
+  <button
+    class="btn-primary"
+    type="submit"
+    [disabled]="saving"
+  >
+    {{ saving ? 'Enregistrement…' : 'Créer le client' }}
+  </button>
+
+  <!-- Erreur -->
+  <p
+    class="form-error"
+    *ngIf="formError"
+  >
+    {{ formError }}
+  </p>
+
+</form>
+
+<!-- États -->
+<p class="state" *ngIf="loading">
+  Chargement du registre…
+</p>
+
+<p class="state error" *ngIf="error">
+  {{ error }}
+</p>
+
+<!-- Liste des clients -->
+<table
+  class="ledger"
+  *ngIf="!loading && !error"
+>
+  <thead>
+  <tr>
+    <th>Réf.</th>
+    <th>Nom</th>
+    <th>E-mail</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr
+    *ngFor="let c of customers"
+    (click)="openCustomer(c.id)"
+    class="row-link"
+  >
+    <td class="mono muted">
+      #{{ c.id }}
+    </td>
+
+    <td>
+      {{ c.nom }}
+    </td>
+
+    <td class="muted">
+      {{ c.email }}
+    </td>
+
+    <td class="chevron">
+      →
+    </td>
+  </tr>
+
+  <tr *ngIf="customers.length === 0">
+    <td
+      colspan="4"
+      class="empty"
+    >
+      Aucun client ne correspond à cette recherche.
+    </td>
+  </tr>
+
+  </tbody>
+</table>

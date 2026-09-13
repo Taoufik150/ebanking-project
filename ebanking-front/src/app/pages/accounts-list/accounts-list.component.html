@@ -1,0 +1,33 @@
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Registre</p>
+    <h1>Comptes</h1>
+  </div>
+</header>
+
+<p class="state" *ngIf="loading">Chargement…</p>
+<p class="state error" *ngIf="error">{{ error }}</p>
+
+<table class="ledger" *ngIf="!loading && !error">
+  <thead>
+    <tr>
+      <th>Compte</th>
+      <th>Titulaire</th>
+      <th>Type</th>
+      <th>Statut</th>
+      <th class="num">Solde</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of accounts" class="row-link" (click)="open(a.id)">
+      <td class="mono muted">{{ a.id.slice(0, 8) }}…</td>
+      <td>{{ a.customerDto?.nom || 'N/A' }}</td>
+      <td><span class="pill neutral">{{ isCurrent(a) ? 'Courant' : 'Épargne' }}</span></td>
+      <td class="muted">{{ a.status }}</td>
+      <td class="num mono">{{ a.balance | number: '1.2-2' }} MAD</td>
+    </tr>
+    <tr *ngIf="accounts.length === 0">
+      <td colspan="5" class="empty">Aucun compte enregistré.</td>
+    </tr>
+  </tbody>
+</table>

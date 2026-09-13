@@ -1,0 +1,22 @@
+nav{
+  box-shadow: 0px 1px 3px 3px #a9b0b8;
+}
+.navbar-brand{
+  font-weight: bold;
+  padding: 12px;
+  color: yellow;
+  background-color: #0a31d3;
+  border: 2px solid yellow;
+  border-radius: 32px;
+}
+#navbarSupportedContent{
+
+  margin-left: 183px;
+
+}
+nav ul li{
+  padding: 25px;
+}
+nav ul li.active{
+  color: yellow;
+}

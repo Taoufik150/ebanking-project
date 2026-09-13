@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+.client-space {
+  --paper: #FAFAF8;
+  --ink: #10192B;
+  --ink-soft: #5B6472;
+  --teal: #1F6F5C;
+  --blue: #2B5CAD;
+  --gold: #B8863B;
+  --line: #DEE1E6;
+
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+}
+
+/* --- Header --- */
+.greeting-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.9rem;
+  margin: 0 0 0.35rem;
+}
+.greeting-sub {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* --- Bloc héros --- */
+.stat-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin: 0 0 0.35rem;
+}
+.stat-caption {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+}
+
+.hero-stat {
+  display: flex;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.hero-accent { width: 6px; flex-shrink: 0; background: var(--gold); }
+.hero-content { padding: 1.75rem 2rem; }
+
+.hero-number {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  line-height: 1.1;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.hero-number .currency {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* --- Panneau comptes --- */
+.accounts-panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.link-all {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--blue);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.link-all:hover { border-color: var(--blue); }
+
+/* --- Ligne de compte, façon relevé --- */
+.account-row {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
+.account-row:last-child { margin-bottom: 0; }
+
+.account-accent { width: 4px; flex-shrink: 0; }
+.account-accent.teal { background: var(--teal); }
+.account-accent.blue { background: var(--blue); }
+
+.account-body {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 1rem 1.25rem;
+  gap: 1rem;
+}
+
+.account-col { flex: 1; min-width: 0; }
+.action-col { flex: 0 0 auto; margin-left: auto; }
+
+.account-type {
+  font-weight: 600;
+  margin: 0;
+}
+
+.account-number {
+  font-family: 'Fraunces', serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.account-balance {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.currency-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.btn-arrow {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-arrow:hover { background: var(--ink); color: #fff; }
+
+/* --- État vide --- */
+.empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
+  border-radius: 0.4rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .account-body { flex-wrap: wrap; row-gap: 0.75rem; }
+  .action-col { margin-left: 0; }
+}
