@@ -54,4 +54,5 @@ public interface BankAccountService {
     List<AccountOperationDto> getAccountHistory(String accountId);
 
     AccountHistoryDto getAccountHistory(String accountId, int page, int size);
+    List<AccountOperationDto> getCustomerOperations(Long customerId);
 }

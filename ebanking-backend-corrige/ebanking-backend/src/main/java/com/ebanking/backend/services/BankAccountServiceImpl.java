@@ -329,4 +329,10 @@ public class BankAccountServiceImpl implements BankAccountService {
         }
         throw new IllegalArgumentException("Type de compte inconnu : " + account.getClass().getName());
     }
+    @Override
+    public List<AccountOperationDto> getCustomerOperations(Long customerId){
+        userRepository.findById(customerId).orElseThrow(()->new CustomerNotFoundException("Utilisateur introuvable :"+customerId));
+        List<AccountOperation> operations=accountOperationRepository.findByBankAccount_Customer_Id(customerId);
+        return operations.stream().map(mapper::fromAccountOperation).collect(Collectors.toList());
+    }
 }

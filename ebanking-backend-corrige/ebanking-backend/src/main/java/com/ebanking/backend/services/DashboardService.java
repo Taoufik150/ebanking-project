@@ -5,6 +5,6 @@ import com.ebanking.backend.dtos.UserDto;
 
 public interface DashboardService {
     DashboardDto getDashboard();
-    UserDto getAdminProfile(Long id);
-    UserDto updateAdmin(UserDto userDto);
+    UserDto getUserProfile(Long id);
+    UserDto updateUser(UserDto userDto);
 }

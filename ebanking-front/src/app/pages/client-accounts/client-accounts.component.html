@@ -1,0 +1,79 @@
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Espace client</p>
+    <h1>Mes comptes</h1>
+  </div>
+</header>
+
+<!-- Chargement -->
+<p class="state" *ngIf="loading">
+  Chargement de vos comptes…
+</p>
+
+<!-- Erreur -->
+<p class="state error" *ngIf="error">
+  {{ error }}
+</p>
+
+<!-- Comptes -->
+<table
+  class="ledger"
+  *ngIf="!loading && !error">
+
+  <thead>
+  <tr>
+    <th>Compte</th>
+    <th>Type</th>
+    <th>Statut</th>
+    <th class="num">Solde</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr
+    *ngFor="let a of accounts"
+    class="row-link"
+    (click)="openAccount(a.id)">
+
+    <!-- ID -->
+    <td class="mono muted">
+      {{ a.id.slice(0, 8) }}…
+    </td>
+
+    <!-- Type -->
+    <td>
+        <span class="pill neutral">
+          {{ isCurrent(a) ? 'Courant' : 'Épargne' }}
+        </span>
+    </td>
+
+    <!-- Statut -->
+    <td class="muted">
+      {{ a.status }}
+    </td>
+
+    <!-- Solde -->
+    <td class="num mono">
+      {{ a.balance | number:'1.2-2' }} MAD
+    </td>
+
+  </tr>
+
+  <!-- Aucun compte -->
+  <tr *ngIf="accounts.length === 0">
+
+    <td
+      colspan="4"
+      class="empty">
+
+      Vous n'avez aucun compte.
+
+    </td>
+
+  </tr>
+
+  </tbody>
+
+</table>
+

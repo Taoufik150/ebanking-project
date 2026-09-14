@@ -21,7 +21,10 @@ export class DashboardService {
       `${this.baseUrl}/profile/${id}`
     );
   }
-  upDateProfile(id:number,admin:User):Observable<User>{
-       return this.http.put<User>(`${this.baseUrl}/admin/${id}`,admin);
+  upDateProfile(id: number, admin: User): Observable<User> {
+    return this.http.put<User>(
+      `${this.baseUrl}/${id}`,
+      admin
+    );
   }
 }

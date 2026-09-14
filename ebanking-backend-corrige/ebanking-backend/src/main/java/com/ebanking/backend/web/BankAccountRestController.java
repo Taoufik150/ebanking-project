@@ -71,7 +71,16 @@ public class BankAccountRestController {
     }
 
     @GetMapping("/customers/{customerId}/accounts")
-    public List<BankAccountDto> getCustomerAccounts(@PathVariable Long customerId) {
+    public List<BankAccountDto> getCustomerAccounts(
+            @PathVariable Long customerId) {
+
         return bankAccountService.getBankAccountsByUser(customerId);
+    }
+
+    @GetMapping("/customers/{customerId}/operations")
+    public List<AccountOperationDto> getCustomerOperations(
+            @PathVariable Long customerId) {
+
+        return bankAccountService.getCustomerOperations(customerId);
     }
 }

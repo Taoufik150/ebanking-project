@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
   <div class="container-fluid px-4">
 
-
     <!-- Logo -->
     <img
       src="assets/logo/ebank-logo.svg"
@@ -27,26 +26,16 @@
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
 
-        <!-- Dashboard -->
+        <!-- Accueil -->
         <li class="nav-item">
           <a
             class="nav-link"
-            routerLink="/admin-home"
+            routerLink="/client-home"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
 
-            📊 Accueil
-          </a>
-        </li>
+            🏠 Accueil
 
-        <!-- Clients -->
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/admin-home/customers"
-            routerLinkActive="active">
-
-            👥 Clients
           </a>
         </li>
 
@@ -54,59 +43,93 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            routerLink="/admin-home/accounts"
+            routerLink="/client-home/accounts"
             routerLinkActive="active">
 
             🏦 Comptes
+
           </a>
         </li>
 
+        <!-- Virements -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/client-home/transfers"
+            routerLinkActive="active">
+
+            Operations
+
+          </a>
+        </li>
+
+        <!-- Cartes -->
+        <!--
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/client-home/cards"
+            routerLinkActive="active">
+
+            💳 Cartes
+
+          </a>
+        </li>
+        -->
+
       </ul>
 
-
       <!-- Notification -->
-      <button class="btn btn-light position-relative me-3">
+      <button
+        class="btn btn-light position-relative me-3"
+        type="button">
 
         🔔
 
         <span
           class="position-absolute top-0 start-100 translate-middle
-             badge rounded-pill bg-danger">
+                 badge rounded-pill bg-danger">
 
-        3
+          2
 
-    </span>
+        </span>
 
       </button>
 
-
-      <!-- Admin -->
+      <!-- Client -->
       <div class="dropdown">
 
         <button
           class="btn btn-light dropdown-toggle"
           type="button"
-          data-bs-toggle="dropdown">
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
 
-          👤 Admin
+          👤 Mon compte
 
         </button>
 
         <ul class="dropdown-menu dropdown-menu-end shadow-sm">
 
+          <!-- Profil -->
           <li>
             <a
               class="dropdown-item"
-              routerLink="/admin-home/profile">
+              routerLink="/client-home/profile">
 
               👤 Mon profil
 
             </a>
           </li>
 
+          <!-- Paramètres -->
           <li>
-            <a class="dropdown-item" routerLink="#">
+            <a
+              class="dropdown-item"
+              routerLink="/client-home/settings">
+
               ⚙️ Paramètres
+
             </a>
           </li>
 
@@ -114,12 +137,15 @@
             <hr class="dropdown-divider">
           </li>
 
-          <li class="dropdown-item" routerLink="/login">
-         <a>
-           🚪 Déconnexion
+          <!-- Déconnexion -->
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="/login">
 
-         </a>
+              🚪 Déconnexion
 
+            </a>
           </li>
 
         </ul>
@@ -128,6 +154,6 @@
 
     </div>
 
-
   </div>
 </nav>
+

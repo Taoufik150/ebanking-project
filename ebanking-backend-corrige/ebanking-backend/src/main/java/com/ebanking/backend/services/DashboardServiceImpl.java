@@ -4,6 +4,7 @@ import com.ebanking.backend.dtos.DashboardDto;
 import com.ebanking.backend.dtos.UserDto;
 import com.ebanking.backend.entities.Admin;
 import com.ebanking.backend.entities.BankAccount;
+import com.ebanking.backend.entities.User;
 import com.ebanking.backend.mappers.BankAccountMapper;
 import com.ebanking.backend.repositories.*;
 import lombok.AllArgsConstructor;
@@ -35,17 +36,17 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public UserDto getAdminProfile(Long id) {
-        Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Admin introuvable"));
+    public UserDto getUserProfile(Long id) {
+        User admin = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("user introuvable"));
 
-        return mapper.fromAdmin(admin);
+        return mapper.fromUser(admin);
     }
 
     @Override
-    public UserDto updateAdmin(UserDto userDto) {
-        Admin admin = adminRepository.findById(userDto.getId())
-                .orElseThrow(() -> new RuntimeException("Admin not found"));
+    public UserDto updateUser(UserDto userDto) {
+        User admin = userRepository.findById(userDto.getId())
+                .orElseThrow(() -> new RuntimeException("user not found"));
 
         admin.setEmail(userDto.getEmail());
         admin.setUsername(userDto.getUsername());
@@ -53,8 +54,8 @@ public class DashboardServiceImpl implements DashboardService {
         admin.setNom(userDto.getNom());
         admin.setPrenom(userDto.getPrenom());
 
-        Admin savedAdmin = adminRepository.save(admin);
+        User savedAdmin = userRepository.save(admin);
 
-        return mapper.fromAdmin(savedAdmin);
+        return mapper.fromUser(savedAdmin);
     }
 }

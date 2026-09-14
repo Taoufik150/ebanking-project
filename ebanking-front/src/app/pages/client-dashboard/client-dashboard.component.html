@@ -23,7 +23,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3 panel-header">
       <h4 class="panel-title mb-0">Mes comptes</h4>
-      <a routerLink="/client/accounts" class="link-all">
+      <a   routerLink="/client-home/accounts" class="link-all">
         Voir tous les comptes
       </a>
     </div>
@@ -63,7 +63,7 @@
         </div>
 
         <div class="account-col action-col">
-          <a [routerLink]="['/client/accounts', account.id]" class="btn-arrow" aria-label="Voir le compte">
+          <a (click)="openAccount(account.id)" class="btn-arrow" aria-label="Voir le compte">
             →
           </a>
         </div>

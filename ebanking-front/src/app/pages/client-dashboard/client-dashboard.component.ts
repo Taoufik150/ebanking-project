@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../core/services/account.service';
 import { BankAccount } from '../../core/models/account.model';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-client-dashboard',
@@ -22,13 +22,27 @@ export class ClientDashboardComponent implements OnInit {
   hasError = false;
 
   // Pour le moment, on utilise le client Hassan
-  customerId = 1;
+  customerId!:number;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService,private router:Router) {}
 
   ngOnInit(): void {
-    this.loadAccounts();
-  }
+   const id=localStorage.getItem('userId');
+   if(!id){
+     console.error('Id utilisateur introuvable');
+     this.hasError=true;
+     this.isLoading=false;
+     return
+   }
+   this.customerId=Number(id);
+   if(isNaN(this.customerId)){
+     console.error('Id invalide');
+     this.isLoading=false;
+     this.hasError=true;
+     return;
+   }
+   this.loadAccounts()
+     }
 
   loadAccounts(): void {
     this.isLoading = true;
@@ -61,4 +75,10 @@ export class ClientDashboardComponent implements OnInit {
   isSavingsAccount(account: BankAccount): boolean {
     return (account as any).intersetRate !== undefined;
   }
+
+  openAccount(id: string): void {
+
+    this.router.navigate(['/client-home/accounts', id]);
+  }
 }
+

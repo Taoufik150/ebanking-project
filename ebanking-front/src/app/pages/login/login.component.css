@@ -25,3 +25,117 @@
 .btn {
   padding: 12px;
 }
+.login-container {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f5f7fa;
+
+  animation: loginBackground 0.8s ease-out;
+}
+
+
+.login-card {
+  width: 400px;
+
+  padding: 35px;
+
+  background: white;
+
+  border-radius: 15px;
+
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+
+  animation: loginCardAppear 0.8s ease-out;
+}
+
+
+.login-logo {
+  width: 180px;
+  max-width: 100%;
+
+  margin-bottom: 10px;
+
+  animation: loginLogoAppear 0.8s ease-out;
+}
+
+
+.login-card h2 {
+  letter-spacing: 2px;
+}
+
+
+.form-control {
+  padding: 12px;
+
+  transition: all 0.25s ease;
+}
+
+
+.form-control:focus {
+  transform: translateY(-1px);
+
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+
+.btn {
+  padding: 12px;
+
+  transition: all 0.25s ease;
+}
+
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   ANIMATIONS LOGIN
+   ========================= */
+
+@keyframes loginBackground {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes loginCardAppear {
+
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+
+@keyframes loginLogoAppear {
+
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}

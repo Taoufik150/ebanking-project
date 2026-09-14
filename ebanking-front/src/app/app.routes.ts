@@ -15,17 +15,29 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 import { ClientHomeComponent } from './pages/client-home/client-home.component';
-
+import {ClientAccountsComponent} from './pages/client-accounts/client-accounts.component';
+import {ClientVirementsComponent} from './pages/client-Operations/client-virements.component';
+import {CustomerProfileComponent} from './pages/client-profile/customer-profile.component';
+import { SplashScreenComponent } from './pages/splash-screen/splash-screen.component';
 export const routes: Routes = [
 
 // =========================
 // LOGIN
 // =========================
-
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login'
+    redirectTo: 'splash'
+  },
+
+  {
+    path: 'splash',
+    component: SplashScreenComponent
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent
   },
 
   {
@@ -108,15 +120,28 @@ children: [
     path: '',
     pathMatch: 'full',
     component: ClientDashboardComponent
+  },
+  {
+    path:'accounts',
+    component:ClientAccountsComponent
+  },{
+    path: 'accounts/:id',
+    component: AccountDetailComponent
+  },
+  {
+    path:'transfers',
+    component:ClientVirementsComponent
+  },{
+    path:'profile',
+    component: CustomerProfileComponent
   }
+
 ]
 
 
 },
 
-// =========================
-// ROUTE INCONNUE
-// =========================
+
 
 {
   path: '**',

@@ -108,4 +108,7 @@ export class AccountService {
       `${this.opsBase}/${id}/accounts`
     );
   }
+  getOperationCustomer(id:number):Observable<AccountOperation[]>{
+  return this.http.get<AccountOperation[]>(`${this.opsBase}/${id}/operations`) ;
+  }
 }

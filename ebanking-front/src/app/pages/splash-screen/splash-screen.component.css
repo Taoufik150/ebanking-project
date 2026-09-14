@@ -1,0 +1,163 @@
+.splash-screen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #ffffff;
+
+  z-index: 9999;
+
+  animation: splashFadeOut 0.6s ease-in-out 2.1s forwards;
+}
+
+
+/* =========================
+   CONTENU
+   ========================= */
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  animation: logoAppear 1s ease-out;
+}
+
+
+/* =========================
+   LOGO
+   ========================= */
+
+.splash-logo {
+  width: 280px;
+  max-width: 70vw;
+
+  animation: logoFloat 2s ease-in-out infinite;
+}
+
+
+/* =========================
+   BARRE DE CHARGEMENT
+   ========================= */
+
+.loader {
+  width: 180px;
+  height: 4px;
+
+  margin-top: 35px;
+
+  background: #e9ecef;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+
+.loader-bar {
+  width: 40%;
+  height: 100%;
+
+  background: #0d6efd;
+
+  border-radius: 10px;
+
+  animation: loading 1.4s ease-in-out infinite;
+}
+
+
+/* =========================
+   TEXTE
+   ========================= */
+
+.loading-text {
+  margin-top: 18px;
+
+  font-size: 14px;
+
+  color: #6c757d;
+
+  letter-spacing: 0.5px;
+
+  animation: textAppear 1s ease-out;
+}
+
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes logoAppear {
+
+  from {
+    opacity: 0;
+    transform: scale(0.75) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+}
+
+
+@keyframes logoFloat {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
+
+
+@keyframes loading {
+
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(450%);
+  }
+
+}
+
+
+@keyframes textAppear {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes splashFadeOut {
+
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+}

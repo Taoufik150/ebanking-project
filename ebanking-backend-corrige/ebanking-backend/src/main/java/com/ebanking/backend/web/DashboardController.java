@@ -21,12 +21,12 @@ public class DashboardController {
 
     @GetMapping("/profile/{id}")
     public UserDto getProfile(@PathVariable Long id) {
-        return dashboardService.getAdminProfile(id);
+        return dashboardService.getUserProfile(id);
     }
 
     @PutMapping("/{adminId}")
     public UserDto updateAdmin(@PathVariable Long adminId, @RequestBody UserDto userDto) {
         userDto.setId(adminId);
-        return dashboardService.updateAdmin(userDto);
+        return dashboardService.updateUser(userDto);
     }
 }
