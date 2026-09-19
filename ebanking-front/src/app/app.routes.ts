@@ -19,6 +19,7 @@ import {ClientAccountsComponent} from './pages/client-accounts/client-accounts.c
 import {ClientVirementsComponent} from './pages/client-Operations/client-virements.component';
 import {CustomerProfileComponent} from './pages/client-profile/customer-profile.component';
 import { SplashScreenComponent } from './pages/splash-screen/splash-screen.component';
+import {SettingComponent} from './pages/setting/setting.component';
 export const routes: Routes = [
 
 // =========================
@@ -98,6 +99,10 @@ children: [
   {
     path: 'accounts/:id',
     component: AccountDetailComponent
+  },
+  {
+    path: 'settings',
+    component:SettingComponent
   }
 ]
 
@@ -134,6 +139,10 @@ children: [
   },{
     path:'profile',
     component: CustomerProfileComponent
+  },
+  {
+    path: 'settings',
+    component:SettingComponent
   }
 
 ]

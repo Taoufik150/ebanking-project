@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -23,7 +24,8 @@ public class BackendApplication {
 	CommandLineRunner init(
 			BankAccountService service,
 			AdminRepository adminRepository,
-			UserRepository userRepository
+			UserRepository userRepository,
+			PasswordEncoder passwordEncoder
 	) {
 		return args -> {
 
@@ -38,7 +40,7 @@ public class BackendApplication {
 				c1.setPrenom("HAssan");
 				c1.setEmail("hassan@gmail.com");
 				c1.setUsername("hassan");
-				c1.setPassword("hassan123");
+				c1.setPassword(passwordEncoder.encode("hassan123"));
 				c1.setPhone(611111111L);
 				c1.setRole(Role.CUSTOMER);
 				service.saveUser(c1);
@@ -48,7 +50,7 @@ public class BackendApplication {
 				c2.setPrenom("Imane");
 				c2.setEmail("imane@gmail.com");
 				c2.setUsername("imane");
-				c2.setPassword("imane123");
+				c2.setPassword(passwordEncoder.encode("imane123"));
 				c2.setPhone(622222222L);
 				c2.setRole(Role.CUSTOMER);
 				service.saveUser(c2);
@@ -62,7 +64,7 @@ public class BackendApplication {
 
 				User admin = new Admin();
 				admin.setUsername("admin");
-				admin.setPassword("admin123");
+				admin.setPassword(passwordEncoder.encode("admin123"));
 				admin.setPhone(600000000L);
 				admin.setRole(Role.ADMIN);
 				admin.setNom("Mansouri");
