@@ -42,7 +42,7 @@ public class JwtService {
     public Claims extractAllClaims(String token){
         return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
     }
-    public boolean isTokenvalid(String token,UserDetails userDetails){
+    public boolean isTokenValid(String token,UserDetails userDetails){
         final String username=extraireUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
